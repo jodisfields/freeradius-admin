@@ -91,7 +91,7 @@ sql {
   server = "fradmin-mysql"
   port = 3306
 	login = "root"
-  password = "password"
+  password = "T3lepresence"
 
 	# Database table configuration for everything except Oracle
 	radius_db = "radius"

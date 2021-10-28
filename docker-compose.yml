@@ -10,9 +10,7 @@ services:
      - ./mysql/srv/initdb.d:/docker-entrypoint-initdb.d
      - ./mysql/srv/data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: password
-    restart: always
-
+      MYSQL_ROOT_PASSWORD: T3lepresence
 
   nginx:
     image: nginx
@@ -25,16 +23,13 @@ services:
      - "./web/conf.d:/etc/nginx/conf.d"
     ports:
       - "80:80"
-    restart: always
 
   php:
     build:
       context: ./php
     container_name: fradmin-php
-    restart: always
     volumes:
       - "./web/src:/var/www/html"
-    restart: always
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -44,7 +39,7 @@ services:
     environment:
       - PMA_HOST=mysql
       - PMA_USER=root
-      - PMA_PASSWORD=password
+      - PMA_PASSWORD=T3lepresence
     ports:
       - "9200:80"
 
@@ -59,14 +54,11 @@ services:
     volumes:
     - "./freeradius/config/freeradius:/etc/freeradius"
     - "./freeradius/logs:/var/log/freeradius"
-
-    restart: always
-    #tty: true
+    tty: true
 
   radtest:
     build: ./radtest
     container_name: fradmin-radtest
     depends_on:
       - radius
-    restart: always
     tty: true
